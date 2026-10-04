@@ -9,14 +9,15 @@ from pypdf import PdfReader
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = Path("/tmp/careerai-data") if os.getenv("VERCEL") else BASE_DIR / "data"
 USERS_FILE = DATA_DIR / "users.json"
 ANALYSIS_FILE = DATA_DIR / "analysis.json"
 
-load_dotenv(dotenv_path=BASE_DIR / ".env")
+if not os.getenv("VERCEL"):
+    load_dotenv(dotenv_path=BASE_DIR / ".env")
 
-app = Flask(__name__)
-app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
+app = Flask(__name__, template_folder=str(BASE_DIR / "templates"), static_folder=None)
+app.config["MAX_CONTENT_LENGTH"] = 4 * 1024 * 1024
 
 CAREER_PROMPT = """Act as an expert AI Career Mentor.
 
@@ -138,7 +139,7 @@ def generate_ai_response(prompt):
     """Send a prompt to Gemini and return its text response."""
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key or api_key == "your_api_key":
-        raise RuntimeError("Gemini API key is missing. Add it to the .env file.")
+        raise RuntimeError("Gemini API key is missing. Set GEMINI_API_KEY in the environment.")
 
     from google import genai
 
@@ -254,7 +255,7 @@ def resume():
 
 @app.errorhandler(413)
 def request_too_large(_error):
-    return error_response("The resume is too large. Please upload a PDF under 10 MB.", 413)
+    return error_response("The upload is too large. Please upload a PDF under 4 MB.", 413)
 
 
 if __name__ == "__main__":
