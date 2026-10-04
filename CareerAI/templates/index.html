@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CareerAI | AI Career Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="CareerAI home">
+        <span class="brand-mark">✦</span>
+        <span><strong>CareerAI</strong><small>AI Career Coach &amp; Resume Analyzer</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#coach">🎯 Career Coach</a>
+        <a class="nav-link" href="#resume">📄 Resume Analyzer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero page-width">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR NEXT MOVE, MADE CLEAR</p>
+        <h1>Build a career path<br><em>that fits you.</em></h1>
+        <p class="hero-text">Practical, personalized guidance for students and freshers. Understand your strengths, find your direction, and take the next confident step.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#coach">Start with your profile <span>↓</span></a>
+          <span class="trust-note"><span class="status-dot"></span> Built for student growth</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Career progress illustration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="visual-card visual-card-main"><span class="visual-icon">↗</span><strong>Career clarity</strong><span>One useful insight at a time.</span></div>
+        <div class="visual-card visual-card-small"><span class="mini-label">YOUR PROGRESS</span><strong>On the right track</strong><div class="progress-line"><i></i></div></div>
+        <div class="visual-spark">✦</div>
+      </div>
+    </section>
+
+    <section id="coach" class="section page-width">
+      <div class="section-heading"><div><p class="eyebrow">01 / PERSONALIZED DIRECTION</p><h2>AI Career Coach</h2></div><p>Tell us where you are. We will help map where you could go.</p></div>
+      <div class="workspace-grid">
+        <form id="career-form" class="form-card">
+          <div class="card-topline"><span class="step-number">01</span><span>Student profile</span><span class="required-note">All fields required</span></div>
+          <div class="field-grid">
+            <label>Full Name<input name="name" type="text" placeholder="e.g. Priya Sharma" required></label>
+            <label>Education<input name="education" type="text" placeholder="e.g. B.Tech Computer Science" required></label>
+            <label class="wide-field">Current Skills<textarea name="skills" rows="3" placeholder="e.g. Python, communication, HTML" required></textarea></label>
+            <label>Experience Level<select name="experience_level" required><option value="">Choose level</option><option>Student / Fresher</option><option>Entry level</option><option>Intermediate</option><option>Experienced</option></select></label>
+            <label>Study Hours Per Day<input name="study_hours" type="number" min="1" max="24" placeholder="e.g. 2" required></label>
+            <label>Career Goal<input name="career_goal" type="text" placeholder="e.g. Get my first tech job" required></label>
+            <label>Target Role<input name="target_role" type="text" placeholder="e.g. Python Developer" required></label>
+          </div>
+          <button class="button button-primary full-button" type="submit"><span>Generate Career Guidance</span><span>→</span></button>
+          <p id="career-status" class="form-status" role="status"></p>
+        </form>
+        <article id="career-result" class="result-card" aria-live="polite"><div class="empty-result"><span class="result-icon">✦</span><h3>Your guidance will appear here</h3><p>Complete your profile and let CareerAI turn your goals into a practical plan.</p></div></article>
+      </div>
+    </section>
+
+    <section id="resume" class="section resume-section">
+      <div class="page-width"><div class="section-heading"><div><p class="eyebrow">02 / MAKE YOUR EXPERIENCE COUNT</p><h2>AI Resume Analyzer</h2></div><p>Get clear feedback that helps your resume speak to the role you want.</p></div>
+        <div class="workspace-grid">
+          <form id="resume-form" class="form-card resume-form" enctype="multipart/form-data">
+            <div class="card-topline"><span class="step-number">02</span><span>Resume review</span><span class="pdf-badge">PDF only</span></div>
+            <label class="upload-zone" for="resume-file"><span class="upload-icon">↑</span><strong id="file-name">Drop your resume here</strong><span>or click to browse your files</span><input id="resume-file" name="resume" type="file" accept="application/pdf,.pdf" required></label>
+            <label>Target Role<input name="target_role" type="text" placeholder="e.g. Frontend Developer" required></label>
+            <label>Experience Level<select name="experience_level" required><option value="">Choose level</option><option>Student / Fresher</option><option>Entry level</option><option>Intermediate</option><option>Experienced</option></select></label>
+            <button class="button button-primary full-button" type="submit"><span>Analyze Resume</span><span>→</span></button>
+            <p id="resume-status" class="form-status" role="status"></p>
+          </form>
+          <article id="resume-result" class="result-card" aria-live="polite"><div class="empty-result"><span class="result-icon">▤</span><h3>Your resume review will appear here</h3><p>Upload a text-based PDF to receive practical, student-friendly feedback.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="prompt-section page-width"><div class="prompt-copy"><p class="eyebrow">03 / THINK BETTER WITH AI</p><h2>🧠 Prompt Engineering</h2><p>The quality of an AI response starts with the quality of the question. Give the model enough context to be useful.</p></div><div class="prompt-board"><div class="prompt-bad"><span>Bad Prompt</span><blockquote>“Analyze my resume”</blockquote></div><div class="prompt-arrow">↓</div><div class="prompt-good"><span>Better Prompt</span><blockquote>A structured prompt contains:</blockquote><ol><li>Role</li><li>Context</li><li>Input</li><li>Instructions</li><li>Output format</li></ol><strong>Better prompt <b>→</b> Better AI response</strong></div></div></section>
+  </main>
+  <footer class="site-footer page-width"><span>✦ CareerAI</span><span>Built for learning, direction, and your next opportunity.</span></footer>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
